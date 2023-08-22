@@ -28,12 +28,19 @@ public class DBTestController {
 
     @GetMapping("/showImage")
     public String showImage(Model model) {
-        PlantEntity img = plantRepository.findById(1L).orElse(null); // 1L ID를 가진 이미지 가져오기, 실제 구현에서는 ID를 동적으로 처리
+
+        PlantEntity img = plantRepository.findById(1L).orElse(null); // 1번 엔티티 속성값 가져옴
+
+
+
+        System.out.println("log @@@@@@@");
+        System.out.println(img);
         if (img != null) {
-            byte[] imageBytes = img.getData();
+            byte[] imageBytes = img.getFile();
             String imageBase64 = Base64.getEncoder().encodeToString(imageBytes);
             model.addAttribute("imageBase64", imageBase64);
         }
+
         return "check_image";
     }
 
