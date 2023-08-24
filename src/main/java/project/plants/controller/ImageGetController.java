@@ -27,6 +27,8 @@ public class ImageGetController {
         byte[] imageData = null; // 이미지 데이터 저장
 
         try  {
+
+            // 일일히 들어가게 하지 말고 처음 로그인 했을 때, DB 연결이 바로 되게 해야한다.
             con = DriverManager.getConnection(url, user, password);
             System.out.println("DB 연결 성공");
             stmt = con.createStatement();
@@ -49,7 +51,7 @@ public class ImageGetController {
     // view 로 출력
     @GetMapping("/showImagePage")
     public String showImagePage() {
-        return "displayImage";
+        return "show_image";
     }
 
 }

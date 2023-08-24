@@ -22,6 +22,7 @@ public class CookieTestController {
                 if ("selectedOption".equals(cookie.getName())) {
                     model.addAttribute("selected", true);
                     model.addAttribute("value", cookie.getValue());
+                    System.out.println(cookie.getValue());
                     return "save_condition";
                 }
             }
@@ -42,6 +43,7 @@ public class CookieTestController {
 
         // 라디오 버튼 값 저장 로직
         Cookie cookie = new Cookie("selectedOption", option);
+        System.out.println(option);
         cookie.setMaxAge(60 * 60 * 24 * 30); // 유효기간 30일
         response.addCookie(cookie);
         model.addAttribute("selected", true);
