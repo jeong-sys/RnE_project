@@ -16,4 +16,7 @@ public class PlantDataEntity {
     private String imgpath;
 
     // 생성자, getters, setters 등 필요한 메서드 추가
+    public String getImgPath() {
+        return imgpath;
+    }
 }

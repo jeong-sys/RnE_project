@@ -26,7 +26,7 @@ public class ImageGetController {
         PlantEntity args = plantrepository.findById(1L).orElse(null);
         PlantDataEntity data = plantdatarepository.findById(1L).orElse(null);
 
-        model.addAttribute("waterOImgPath", data.getImgpath());
+        model.addAttribute("waterOImgPath", data.getImgPath());
         model.addAttribute("argsImgPath", args.getArgs());
 
         return "displayImage";
@@ -40,3 +40,4 @@ public class ImageGetController {
     }
 
 }
+
