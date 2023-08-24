@@ -1,5 +1,6 @@
 package project.plants.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,9 +13,14 @@ import java.sql.*;
 public class ImageGetController {
 
     // DB 연결
-    private final String url = "jdbc:mysql://localhost:3306/plants";
-    private final String user = "root";
-    private final String password = "12345678";
+    @Value("${db.url}")
+    private String url;
+
+    @Value("${db.user}")
+    private String user;
+
+    @Value("${db.password}")
+    private String password;
 
     private Connection con;
     private Statement stmt;
@@ -27,7 +33,7 @@ public class ImageGetController {
         byte[] imageData = null; // 이미지 데이터 저장
 
         try  {
-            con = DriverManager.getConnection(url, user, password);
+            con = DriverManager.getConnection(this.url, this.user, this.password);
             System.out.println("DB 연결 성공");
             stmt = con.createStatement();
             System.out.println("statement 객체 생성 성공");
