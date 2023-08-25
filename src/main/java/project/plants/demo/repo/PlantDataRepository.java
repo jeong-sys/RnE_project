@@ -10,6 +10,6 @@ import project.plants.demo.entity.PlantDataEntity;
 // 인터페이스 생성
 @Repository
 public interface PlantDataRepository extends JpaRepository<PlantDataEntity, Long> {
-    @Query("SELECT pd.imgPath FROM PlantData pd WHERE pd.date = :date AND pd.type = :type")
+    @Query("SELECT pd.imgPath FROM PlantDataEntity pd WHERE pd.date = :date AND pd.type = :type")
     String findImgPathByDateAndType(@Param("date") String date, @Param("type") String type);
 }

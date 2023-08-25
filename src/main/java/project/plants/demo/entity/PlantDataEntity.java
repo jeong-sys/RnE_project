@@ -10,13 +10,31 @@ import javax.persistence.*;
 public class PlantDataEntity {
 
     @Id
-    private Long id;
+    private long id;
+
+    @Column(length = 255)
     private String date;
+
+    @Column(length = 255)
     private String type;
-    private String imgpath;
+
+    @Column(length = 255)
+    private String imgPath;
 
     // 생성자, getters, setters 등 필요한 메서드 추가
     public String getImgPath() {
-        return imgpath;
+        return imgPath;
+    }
+
+    public String geType() {
+        return type;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 }

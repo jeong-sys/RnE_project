@@ -10,7 +10,7 @@ import project.plants.demo.entity.PlantEntity;
 // 인터페이스 생성
 @Repository
 public interface PlantRepository extends JpaRepository<PlantEntity, Long> {
-    @Query("SELECT a.args FROM Args a")
-    List<String> findAllArgs();
+    //@Query("SELECT a.PlantEntity FROM PlantEntity a")
+    List<PlantEntity> findAll();
 
 }
