@@ -11,6 +11,7 @@ public class PlantEntity {
 
     @Id // ID , DB에서는 PK(Primary Key)라고 함
     private Long id;
+    private String filepath;
 
     @Column(length = 255)
     private String args;
