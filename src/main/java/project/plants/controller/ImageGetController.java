@@ -27,7 +27,7 @@ public class ImageGetController {
     // For test
     public String showImages(Model model) {
         //PlantEntity args = plantrepository.findById(1L).orElse(null);
-        PlantDataEntity data = plantdatarepository.findById(1L).orElse(null);
+        //PlantDataEntity data = plantdatarepository.findById(1L).orElse(null);
 
         String imgPath = plantdatarepository.findImgPathByDateAndType("day1", "real");
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class PlantDataEntity {
 
     @Id
-    private long id;
+    private Long id;
 
     @Column(length = 255)
     private String date;

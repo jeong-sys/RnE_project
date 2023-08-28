@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class PlantEntity {
 
     @Id // ID , DB에서는 PK(Primary Key)라고 함
-    private long id;
+    private Long id;
 
     @Column(length = 255)
     private String args;
