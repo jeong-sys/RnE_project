@@ -13,10 +13,7 @@ public class PlantEntity {
     @Id // ID , DB에서는 PK(Primary Key)라고 함
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동 관리, 생성할 떄마다 1,2,.. 증가
     private Long id;
-    private String filename;
-
-    @Lob
-    private byte[] file;
+    private String filepath;
 
 }
 

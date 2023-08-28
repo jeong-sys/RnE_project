@@ -1,6 +1,7 @@
 package project.plants.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,8 +11,13 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+// 쿠키 사용 안함
 @Controller
+@Service
 public class CookieTestController {
+
+    private String condition = "";
 
     @GetMapping("/save_capture")
     public String getCapturePage(HttpServletRequest request, Model model){
@@ -22,13 +28,14 @@ public class CookieTestController {
                 if ("selectedOption".equals(cookie.getName())) {
                     model.addAttribute("selected", true);
                     model.addAttribute("value", cookie.getValue());
-                    System.out.println(cookie.getValue());
-                    return "save_condition";
+                    condition = cookie.getValue();
+                    // System.out.println(cookie.getValue());
+                    return "cookie_condition";
                 }
             }
         }
         model.addAttribute("selected", false);
-        return "save_condition";
+        return "cookie_condition";
     }
 
     @PostMapping("/save_capture")
@@ -43,11 +50,16 @@ public class CookieTestController {
 
         // 라디오 버튼 값 저장 로직
         Cookie cookie = new Cookie("selectedOption", option);
-        System.out.println(option);
+        // System.out.println(option);
         cookie.setMaxAge(60 * 60 * 24 * 30); // 유효기간 30일
         response.addCookie(cookie);
         model.addAttribute("selected", true);
         model.addAttribute("value", option);
-        return "save_condition";
+        return "cookie_condition";
+    }
+
+    // 조건 선택 값 ImageGetController에 넘겨줌
+    public String condition(){
+        return this.condition;
     }
 }
