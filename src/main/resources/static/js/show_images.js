@@ -45,36 +45,45 @@ function displayImages(data) {
     document.getElementById('image2').src = image2Data; // 두 번째 이미지 표시 (있으면)
 }
 
-// 현재 페이지의 text를 캐시에 저장하는 함수
-function saveCurrentTextToCache() {
-    const textInput = document.querySelector('.text'); // text 입력 요소 선택
-    const textValue = textInput.value; // text 값 가져오기
-
-    // localStorage에 currentPage 값으로 textValue 저장
-    localStorage.setItem("page" + currentPage, textValue);
-    console.log("cache save success")
-}
-
-// text 내용이 있으면 보여주고, 없으면 빈값으로 변경
-function clearText() {
-    const textInput = document.querySelector('.text');
-    if (localStorage.getItem("page" + currentPage) != '') {
-        localStorage.getItem("page" + currentPage)
-    }
-    else { textInput.value = ''; }
-}
-
-// 페이지 문자 변화
 function updatePageNum(){
     document.getElementById('page').innerText = `Page ${currentPage}`;
 }
 
-// 페이지 이동하는 함수 (이전/다음 버튼 클릭 시)
-function changePage(offset) {
-    saveCurrentTextToCache(); // 현재 text를 저장하는 함수 호출
-    currentPage += offset; // 현재 페이지 번호를 업데이트
-    updatePageNum();
-    clearText(); // text 입력 내용 지우기
-    loadImages(); // 이미지 로드 함수 호출
+// Cache에 현재 페이지의 텍스트를 저장하는 함수
+async function saveCurrentTextToCache() {
+    const textInput = document.querySelector('.text');
+    const textValue = textInput.value;
+
+    // Cache API를 사용해 값을 저장
+    const cache = await caches.open('page-texts');
+    const response = new Response(new Blob([textValue], { type: 'text/plain' }));
+    await cache.put(`text-page-${currentPage}`, response);
 }
+
+// 현재 페이지에 해당하는 텍스트가 캐시에 있다면 불러와 표시
+async function loadTextFromCache() {
+    const cache = await caches.open('page-texts');
+    const response = await cache.match(`text-page-${currentPage}`);
+    const textInput = document.querySelector('.text');
+
+    if (response) {
+        const textValue = await response.text();
+        textInput.value = textValue;
+    } else {
+        textInput.value = '';
+    }
+}
+
+// 페이지 이동하는 함수 (이전/다음 버튼 클릭 시)
+async function changePage(offset) {
+    await saveCurrentTextToCache();
+    currentPage += offset;
+    updatePageNum();
+    await loadImages();
+    await loadTextFromCache();
+}
+
+// ... 기존 코드 ...
+
+// 페이지 문자 변화
 
