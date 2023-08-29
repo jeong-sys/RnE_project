@@ -67,7 +67,7 @@ async function loadTextFromCache() {
     const textInput = document.querySelector('.text');
 
     if (response) {
-        const textValue = await response.text();
+        const textValue= await response.text();
         textInput.value = textValue;
     } else {
         textInput.value = '';
@@ -79,11 +79,8 @@ async function changePage(offset) {
     await saveCurrentTextToCache();
     currentPage += offset;
     updatePageNum();
-    await loadImages();
+    loadImages();
     await loadTextFromCache();
 }
 
-// ... 기존 코드 ...
-
-// 페이지 문자 변화
 
