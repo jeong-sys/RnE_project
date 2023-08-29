@@ -55,10 +55,13 @@ function saveCurrentTextToCache() {
     console.log("cache save success")
 }
 
-// text 입력 내용을 지우는 함수
+// text 내용이 있으면 보여주고, 없으면 빈값으로 변경
 function clearText() {
     const textInput = document.querySelector('.text');
-    textInput.value = '';
+    if (localStorage.getItem("page" + currentPage) != '') {
+        localStorage.getItem("page" + currentPage)
+    }
+    else { textInput.value = ''; }
 }
 
 // 페이지 문자 변화
