@@ -1,5 +1,6 @@
 let currentPage = 1; // 현재 페이지 번호
 let currentTable = null; // 현재 선택된 테이블
+let finalPage = 2;
 
 // 사용자가 선택한 테이블에 따라 이미지를 로드하는 함수
 function submitSelection() {
@@ -17,6 +18,13 @@ function submitSelection() {
         return; // 함수 종료
     }
 
+    // 캐시 삭제
+    caches.keys().then(function(keyList) {
+        return Promise.all(keyList.map(function(key) {
+            return caches.delete(key);
+        }));
+    });
+
     // getElementById : 아이디 요소 선택
     document.getElementById('selection').style.display = 'none'; // 선택창 숨김
     document.getElementById('imageDisplay').style.display = 'block'; // 이미지 페이지 표시
@@ -24,15 +32,20 @@ function submitSelection() {
 }
 
 // 이미지를 로드하는 함수
-function loadImages() {
-    fetch(`/getImages?page=${currentPage}&condition=${currentTable}`) // 서버에 이미지 데이터 요청
-        .then(response => response.json()) // 응답을 JSON 형식으로 파싱
-        .then(data => { // 데이터 처리
-            if (data.length == 0) { // 이미지 데이터가 없으면
-                window.location.href = "ImageFinish"; // 다른 페이지로 리다이렉트
-            }
-            displayImages(data); // 이미지 표시 함수 호출
-        });
+async function loadImages() {
+
+    const response = await fetch(`/getImages?page=${currentPage}&condition=${currentTable}`); // fetch 요청
+    const data = await response.json(); // 응답을 JSON 형식으로 파싱
+
+    btnChange();
+    displayImages(data);
+}
+
+// 마지막 페이지 버튼 submit 변경
+function btnChange() {
+    if (currentPage == finalPage)
+    { document.getElementById('write_submit').innerText = `Result`; }
+    else { document.getElementById('write_submit').innerText = 'Next'}
 }
 
 // 받아온 이미지 데이터를 표시하는 함수
@@ -56,7 +69,7 @@ async function saveCurrentTextToCache() {
 
     // Cache API를 사용해 값을 저장
     const cache = await caches.open('page-texts');
-    const response = new Response(new Blob([textValue], { type: 'text/plain' }));
+    const response = new Response(new Blob([textValue], { type: 'text/plain;charset=utf-8' }));
     await cache.put(`text-page-${currentPage}`, response);
 }
 
@@ -77,10 +90,27 @@ async function loadTextFromCache() {
 // 페이지 이동하는 함수 (이전/다음 버튼 클릭 시)
 async function changePage(offset) {
     await saveCurrentTextToCache();
-    currentPage += offset;
-    updatePageNum();
-    loadImages();
-    await loadTextFromCache();
+
+    const newPage = currentPage + offset; // 새로운 페이지 계산
+
+    // 이미지 로드 시도
+    const response = await fetch(`/getImages?page=${newPage}&condition=${currentTable}`);
+    const data = await response.json();
+
+    // 이미지 데이터가 있을 경우만 페이지를 업데이트
+    if (data.length > 0) {
+        currentPage = newPage; // 페이지 번호 업데이트
+        btnChange();
+        updatePageNum();
+        displayImages(data);
+        await loadTextFromCache();
+    } else {
+        if (confirm("저장하고 점수를 확인하시겠습니까?")) {
+            window.location.href = "ImageFinish";
+        }
+    }
 }
+
+
 
 
