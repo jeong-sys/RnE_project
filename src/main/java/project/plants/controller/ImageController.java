@@ -1,28 +1,31 @@
 package project.plants.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import project.plants.demo.repo.PlantRepository;
 
+import javax.persistence.Cacheable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 @Controller
+@EnableCaching
 public class ImageController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate; // JDBC 객체 생성 (JDBC 데이터 베이스에 대한 접근 방식, 구조적 반복 줄일 수 있음) : SQL쿼리 실행
 
-    @GetMapping("/getImage")
+    @GetMapping("/getImages")
     @ResponseBody
     public List<String> getImages(@RequestParam int page, @RequestParam String condition) { // 페이지, 조건을 파라미터로 받음
         ArrayList<String> encodedImageList = new ArrayList<>(); // Base64(binary Data를 텍스트로 변경)로 인코딩된 이미지 저장 리스트
@@ -75,4 +78,5 @@ public class ImageController {
     public String showImagePage() {
         return "show_images";
     }
+
 }

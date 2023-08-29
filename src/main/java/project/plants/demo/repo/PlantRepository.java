@@ -12,5 +12,6 @@ public interface PlantRepository extends JpaRepository<PlantEntity, Long> {
 
     // PlantRepository : DB와 소통하는 인터페이스, JPA가 해당 객체를 알아서 만듦
     // <PlantEntity : 관리 대상, Long : 타입>
-    List<PlantEntity> findByIdBetween(Long startId, Long endId);
+
+
 }

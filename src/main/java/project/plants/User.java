@@ -7,10 +7,8 @@ import lombok.Setter;
 @Setter
 public class User {
 
-    private String pcondition;
-    public String getCondition(){ return pcondition; }
-    public void setCondition(String pcondition) {
-        this.pcondition = pcondition;
-    }
+    private Long id;
+    private Long days;
+    private String write;
 
 }
