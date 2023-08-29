@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'net.sf.ehcache:ehcache'
 
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 

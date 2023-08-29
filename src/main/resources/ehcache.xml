@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+    <!-- Default cache configuration -->
+    <defaultCache
+            maxEntriesLocalHeap="100"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120">
+    </defaultCache>
+
+    <!-- Custom cache named page-texts -->
+    <cache name="page-texts"
+           maxEntriesLocalHeap="500"
+           eternal="false"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600">
+    </cache>
+
+</ehcache>
