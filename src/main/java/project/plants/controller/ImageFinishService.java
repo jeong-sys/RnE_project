@@ -11,8 +11,9 @@ import org.springframework.cache.ehcache.EhCacheCache;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-@SpringBootApplication
-@EnableCaching
+import java.util.List;
+
+@Service
 public class ImageFinishService {
 
     @Autowired
@@ -22,22 +23,24 @@ public class ImageFinishService {
     private CacheManager cacheManager;
 
     public void saveCache() {
-
         Cache cache = cacheManager.getCache("page-texts");
-        Ehcache ehcache = (Ehcache) cache.getNativeCache();
-        System.out.println("@@@@@");
-        System.out.println(ehcache.getKeys());
+        System.out.println(cache.getName());
 
-        for (Object key : ehcache.getKeys()) {
-            Element element = ehcache.get(key);
-            String page = key.toString().split("-")[2];
-            System.out.println(page);
-            String text = (String) element.getObjectValue();
-            System.out.println(text);
+        if (cache != null) {
+            Ehcache ehcache = (Ehcache) cache.getNativeCache();
+            System.out.println(ehcache.getKeys());
 
-            // 데이터베이스에 저장
-            String sql = "INSERT INTO write_test (page, text) VALUES (?, ?)";
-            jdbcTemplate.update(sql, page, text);
+            for (Object key : ehcache.getKeys()) {
+
+                System.out.println("@@@@@@");
+                Element element = ehcache.get(key);
+                String page = key.toString().split("-")[2];
+                String text = (String) element.getObjectValue();
+
+                // 데이터베이스에 저장
+                String sql = "INSERT INTO write_test (page, text) VALUES (?, ?)";
+                jdbcTemplate.update(sql, page, text);
+            }
         }
     }
 }

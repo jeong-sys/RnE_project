@@ -3,20 +3,28 @@
          xsi:noNamespaceSchemaLocation="http://www.ehcache.org/ehcache.xsd"
          updateCheck="false">
 
-    <!-- Default cache configuration -->
+    <!-- default Cache 설정 (반드시 선언해야 하는 Cache) -->
     <defaultCache
-            maxEntriesLocalHeap="100"
+            maxEntriesLocalHeap="10000"
             eternal="false"
-            timeToIdleSeconds="120"
-            timeToLiveSeconds="120">
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="1200"
+            overflowToDisk="false"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU">
     </defaultCache>
 
-    <!-- Custom cache named page-texts -->
+    <!-- 사용하고자 하는 캐시 별 설정 -->
     <cache name="page-texts"
-           maxEntriesLocalHeap="500"
+           maxEntriesLocalHeap="10000"
            eternal="false"
-           timeToIdleSeconds="300"
-           timeToLiveSeconds="600">
+           timeToIdleSeconds="1200"
+           timeToLiveSeconds="1200"
+           overflowToDisk="false"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LRU">
     </cache>
 
 </ehcache>
