@@ -76,7 +76,7 @@ async function saveCurrentTextToCache() {
 // 현재 페이지에 해당하는 텍스트가 캐시에 있다면 불러와 표시
 async function loadTextFromCache() {
     const cache = await caches.open('page-texts');
-    const response = await cache.match(`text-page-${currentPage}`);
+    const response = await caches.match(`text-page-${currentPage}`);
     const textInput = document.querySelector('.text');
 
     if (response) {
@@ -106,10 +106,52 @@ async function changePage(offset) {
         await loadTextFromCache();
     } else {
         if (confirm("저장하고 점수를 확인하시겠습니까?")) {
+            await sendDataToServer();
             window.location.href = "ImageFinish";
         }
     }
 }
+
+// 모든 캐시된 데이터를 불러와 서버로 전송
+async function sendDataToServer() {
+    const cacheData = await fetchDataFromCache('page-texts');
+    console.log("Sending data: ", cacheData);
+
+    // 데이터를 서버에 전송합니다.
+    fetch('/saveCache', { // fetch API 로 '/saveCache'경로에 POST 요청
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // json 형태 전송
+        },
+        body: JSON.stringify(cacheData) // 문자열 형태의 json 전송
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+}
+
+// 모든 캐시된 데이터를 불러오는 함수
+async function fetchDataFromCache(cacheName) {
+    const cache = await caches.open(cacheName);
+    const keys = await cache.keys(); // 해당 캐시의 모든 키(URL 가져옴)
+
+    let cacheData = [];
+
+    for (let request of keys) {
+        const response = await cache.match(request);
+        const data = await response.text();
+
+        cacheData.push({
+            key: request.url,
+            value: data
+        });
+    }
+
+    return cacheData;
+}
+
+
 
 
 
