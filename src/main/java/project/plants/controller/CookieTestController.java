@@ -1,7 +1,6 @@
 package project.plants.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 // 쿠키 사용 안함
 @Controller
-@Service
 public class CookieTestController {
 
     private String condition = "";
