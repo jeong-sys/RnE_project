@@ -107,7 +107,7 @@ async function changePage(offset) {
     } else {
         if (confirm("저장하고 점수를 확인하시겠습니까?")) {
             await sendDataToServer();
-            window.location.href = "ImageFinish";
+            window.location.href = "score_check";
         }
     }
 }
@@ -118,7 +118,7 @@ async function sendDataToServer() {
     console.log("Sending data: ", cacheData);
 
     // 데이터를 서버에 전송합니다.
-    fetch('/saveCache', { // fetch API 로 '/saveCache'경로에 POST 요청
+    fetch('/saveCacheToDB', { // fetch API 로 '/saveCache'경로에 POST 요청
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' // json 형태 전송
