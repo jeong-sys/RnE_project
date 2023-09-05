@@ -14,6 +14,7 @@ import java.lang.reflect.Member;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -26,6 +27,7 @@ public class ImageFinishController {
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping("/getTexts")
+    @ResponseBody
     public List<String> getTexts(){
         ArrayList<String> textList = new ArrayList<>();
 
@@ -56,24 +58,29 @@ public class ImageFinishController {
         }
         System.out.println("textList" + textList);
 
-        ArrayList<String> rightList = new ArrayList<>();
+        HashMap<Integer, String> map = new HashMap<>();
 
+        // 선택한 조건에서의 text List
         String text_day1 = textList.get(1);
         String text_day2 = textList.get(0);
 
+        // day1
+        if (text_day1.contains("test1_1")) {
+            map.put(1, "test1");
+        }
 
-        // 여러개인 경우 어떻게 넣어야할지 생각하기
-        if (text_day1.contains("test1")) {
-            rightList.add("test1");
-        } else { rightList.add(""); }
+        if (text_day1.contains("test1_2")) {
+            map.put(1, "test1_2");
+        }
 
+        // day2
         if (text_day2.contains("test2")) {
-            rightList.add("test2");
-        } else { rightList.add(""); }
+            map.put(2, "test2");
+        }
 
-        System.out.println("rightList" + rightList);
+        System.out.println("HashMap" + map);
 
-        return rightList;
+        return (List<String>) map;
     }
 
     @GetMapping("/score_check")
