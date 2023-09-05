@@ -7,13 +7,23 @@ import javax.persistence.*;
 @Getter //Getter 메소드 생성
 @Setter
 @NoArgsConstructor
-@Entity//DB 테이블에 저장될 클래스
+@Entity(name = "test1")
 public class PlantEntity {
 
-    @Id // ID , DB에서는 PK(Primary Key)라고 함
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동 관리, 생성할 떄마다 1,2,.. 증가
+    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
+
+    @Column(name = "filename", length = 50)
+    private String filename;
+
+    @Column(name = "filepath", length = 1000)
     private String filepath;
+
+    @Column(name = "environment_id")
+    private int environment_id;
+
+    @Column(name = "days_id")
+    private int days_id;
 
 }
 

@@ -24,12 +24,14 @@ public class ImageController {
     @Autowired
     private JdbcTemplate jdbcTemplate; // JDBC 객체 생성 (JDBC 데이터 베이스에 대한 접근 방식, 구조적 반복 줄일 수 있음) : SQL쿼리 실행
 
+    private String send_condition;
     @GetMapping("/getImages")
     @ResponseBody
     public List<String> getImages(@RequestParam int page, @RequestParam String condition) { // 페이지, 조건을 파라미터로 받음
         ArrayList<String> encodedImageList = new ArrayList<>(); // Base64(binary Data를 텍스트로 변경)로 인코딩된 이미지 저장 리스트
 
         System.out.println(condition);
+        send_condition = condition;
 
         // condition 유효하지 않으면 예외 발생
         if (!isValidTable(condition)) {
@@ -77,18 +79,16 @@ public class ImageController {
         return validTables.contains(tableName); // 테이블명 유효한지 확인 후 반환
     }
 
-    @GetMapping("/showImagePage")
+    @GetMapping("/select_condition")
     public String showImagePage() {
         return "show_images";
     }
 
-    @PostMapping("/saveCache")
+    @PostMapping("/saveCacheToDB")
     public ResponseEntity<String> saveCacheFromClient(@RequestBody List<CacheItem> cacheItems) {
         System.out.println("Received data : " + cacheItems);
         for (CacheItem item : cacheItems) {
-            System.out.println(item);
-            System.out.println("@@@");
-            imageFinishService.saveCache(item);
+            imageFinishService.saveCache(item, send_condition);
         }
         return ResponseEntity.ok("Cache saved successfully");
     }
