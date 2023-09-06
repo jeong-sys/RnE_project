@@ -28,7 +28,7 @@ public class ImageFinishController {
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping("/getTexts")
-    public List<String> getTexts(){
+    public ResponseEntity<Map<String, String>> getTexts(){
         ArrayList<String> textList = new ArrayList<>();
 
         String condition_result = imageFinishService.send_DB_condition();
@@ -58,7 +58,7 @@ public class ImageFinishController {
         }
         System.out.println("textList" + textList);
 
-        HashMap<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
 
         // 선택한 조건에서의 text List
         String text_day1 = textList.get(1);
@@ -99,7 +99,7 @@ public class ImageFinishController {
 
         System.out.println(map);
 
-        return (List<String>) map;
+        return ResponseEntity.ok(map);
     }
 
     @GetMapping("/score_check")
