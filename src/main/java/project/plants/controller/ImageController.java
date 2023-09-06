@@ -45,7 +45,8 @@ public class ImageController {
 
         try {
             // SQL 쿼리 실행(조회)
-            jdbcTemplate.query(
+            
+            List<String> result = jdbcTemplate.query(
                 sql, 
                 new RowMapper<String>() { // RowMapper : ResultSet을 객체로 변환
                     @Override
@@ -62,7 +63,9 @@ public class ImageController {
                     }
                 }, 
                 new Object[]{startIndex, endIndex}
-            ).forEach(encodedImage -> encodedImageList.add(encodedImage)); // 인코딩 이미지 리스트에 추가
+            );
+            
+            result.forEach(encodedImage -> encodedImageList.add(encodedImage)); // 인코딩 이미지 리스트에 추가
 
             // forEach 람다식 : list.forEach(변수 -> 반복처리(변수))
         } catch (Exception e) {

@@ -15,9 +15,7 @@ public class ImageFinishService {
     public void saveCache(CacheItem item, String condition) {
         
         String key = item.getKey();
-        System.out.println(key);
         String value = item.getValue();
-        System.out.println(value);
         String page = key.split("-")[2];
 
         DB_condition = condition + "_result";

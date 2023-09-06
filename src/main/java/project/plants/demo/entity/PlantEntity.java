@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Getter //Getter 메소드 생성
 @Setter
 @NoArgsConstructor
-@Entity(name = "test1")
+@Entity
+@Table(name = "test2")
 public class PlantEntity {
 
     @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY) 
