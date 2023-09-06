@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ImageFinishController {
@@ -27,7 +28,6 @@ public class ImageFinishController {
     private JdbcTemplate jdbcTemplate;
 
     @GetMapping("/getTexts")
-    @ResponseBody
     public List<String> getTexts(){
         ArrayList<String> textList = new ArrayList<>();
 
@@ -58,27 +58,46 @@ public class ImageFinishController {
         }
         System.out.println("textList" + textList);
 
-        HashMap<Integer, String> map = new HashMap<>();
+        HashMap<String, String> map = new HashMap<>();
 
         // 선택한 조건에서의 text List
         String text_day1 = textList.get(1);
+        System.out.println("day1 text : " + text_day1);
         String text_day2 = textList.get(0);
+        System.out.println("day2 text : " + text_day2);
 
-        // day1
-        if (text_day1.contains("test1_1")) {
-            map.put(1, "test1");
+        System.out.println(condition_result);
+
+        if ("test1_result".equals(condition_result)) {
+
+            System.out.println("@@@ test1_result @@@");
+            // test1_day1
+            if (text_day1.contains("day1_1")) {
+                map.put("day1", "day1_1");
+            }
+            if (text_day1.contains("day1_2")) {
+                map.put("day1", "day1_2");
+            }
+            // test1_day2
+            if (text_day2.contains("day2_1")) {
+                map.put("day2", "day2_1");
+            }
         }
 
-        if (text_day1.contains("test1_2")) {
-            map.put(1, "test1_2");
+        if ("test2_result".equals(condition_result)) {
+
+            System.out.println("@@@ test2_result @@@");
+            // test2_day1
+            if (text_day1.contains("day1_1")) {
+                map.put("day1", "day1_1");
+            }
+            // test2_day2
+            if (text_day2.contains("day2_1")) {
+                map.put("day2", "day2_1");
+            }
         }
 
-        // day2
-        if (text_day2.contains("test2")) {
-            map.put(2, "test2");
-        }
-
-        System.out.println("HashMap" + map);
+        System.out.println(map);
 
         return (List<String>) map;
     }
