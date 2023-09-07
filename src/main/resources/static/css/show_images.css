@@ -1,0 +1,37 @@
+body {
+    background-image: url('../images/base.jpg'); /* 이미지 경로 확인해서 수정*/
+    background-size: cover; /* 배경 이미지를 페이지에 맞게 조절 */
+    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
+}
+
+h1 {
+    text-align: center; /* 텍스트를 중앙에 정렬 */
+    margin-top: 50px; /* 상단 여백 조정 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+
+.test-selection {
+    text-align: center; /* 라벨과 버튼을 중앙에 정렬합니다 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+
+.test-selection label {
+    display: block; /* 라벨을 세로로 배열합니다 */
+}
+
+.test-selection button {
+    display: block; /* 버튼을 라벨 아래 중앙에 위치시킵니다 */
+    margin: 10px auto; /* 상하 마진을 추가하고 중앙에 위치시킵니다 */
+}
+
+.image-group {
+    display: flex; /* 이미지들을 가로로 배열합니다 */
+    justify-content: center; /* 이미지 그룹을 중앙에 정렬합니다 */
+}
+
+.journal-input {
+    display: block; /* 입력 창을 블록 요소로 만들어 이미지 그룹 아래에 위치시킵니다 */
+    margin: 20px auto; /* 상하 마진을 추가하고 중앙에 위치시킵니다 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+

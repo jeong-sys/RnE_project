@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="/js/keyword.js" charset="utf-8"></script>
-</head>
-<body>
-<!--    일지 기록 점수에 맞춰서 글씨 변경 필요-->
-    <p style="color:red"> " 30점, 아직 공부가 더 필요해요 ! " </p>
-    <table border = "1">
-        <caption>
-            <strong>Result</strong>
-        </caption>
-        <th>Day</th>
-        <th>Keyword</th>
-        <tr>
-            <td> Day 1 </td>
-            <td>
-                <p id="day1_1" style="color:red;">test1</p>
-                <p id="day1_2" style="color:red;">test2</p>
-            </td>
-        </tr>
-        <tr>
-            <td> Day 2 </td>
-            <td>
-                <p id="day2_1" style="color:red;">test1</p>
-            </td>
-        </tr>
-    </table>
-    <div id="result1"></div>
-    <div id="result2"></div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/finishPage.css">
+        <title>finishPage</title>
+        <script src="/js/keyword.js" charset="utf-8"></script>
+    </head>
+    <body>
+    <!--    일지 기록 점수에 맞춰서 글씨 변경 필요-->
+        <h1>OO 점이에요</h1>
+        <div class="table-container">
+            <table border="1">
+                <caption>
+                    <strong>Result</strong>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Keyword</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> Day 1 </td>
+                        <td>
+                            <p id="day1_1" style="color:red;">test1</p>
+                            <p id="day1_2" style="color:red;">test2</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Day 2 </td>
+                        <td>
+                            <p id="day2_1" style="color:red;">test1</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="result1"></div>
+        <div id="result2"></div>
+    </body>
 </html>

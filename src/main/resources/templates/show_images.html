@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Show Images</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/show_images.css">
+        <title>show_images</title>
         <script src="/js/show_images.js" charset="utf-8"></script>
     </head>
     <body>
-        <div id="selection">
-            <p>조건 선택</p>
+        <h1>- 조건을 선택해주세요. -</h1>
+        <div id="selection" class="test-selection">
             <label>
                 <input type="radio" name="table" value="test1"> Test1
             </label>
             <label>
                 <input type="radio" name="table" value="test2"> Test2
             </label>
+            <label>
+                <input type="radio" name="table" value="test3"> Test3
+            </label>
+            <label>
+                <input type="radio" name="table" value="test4"> Test4
+            </label>
             <button onclick="submitSelection()">Submit</button>
         </div>
 
         <div id="imageDisplay" style="display:none;">
             <p id="page">Page 1</p>
-            <img id="image1" alt="Image 1" width="300" height="300">
-            <img id="image2" alt="Image 2" width="300" height="300">
+            <div class="image-group">
+                <img id="image1" alt="Image 1" width="300" height="300">
+                <img id="image2" alt="Image 2" width="300" height="300">
+                <img id="image3" alt="Image 3" width="300" height="300">
+                <img id="image4" alt="Image 4" width="300" height="300">
+            </div>
             <div>
-                <input type="text" placeholder="식물 일지 입력" class="text" style="width:600px;height:150px;font-size:15px;">
+                <input type="text" placeholder="식물 일지 입력" class="text journal-input" style="width:600px;height:150px;font-size:15px;">
             </div>
             <br>
             <div>

@@ -1,0 +1,30 @@
+body {
+    background-image: url('../images/base.jpg'); /* 이미지 경로 확인해서 수정*/
+    background-size: cover; /* 배경 이미지를 페이지에 맞게 조절 */
+    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
+}
+
+h1 {
+    text-align: center; /* 텍스트를 중앙에 정렬 */
+    margin-top: 50px; /* 상단 여백 조정 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+    margin-bottom: 20px; /* h1 요소의 하단 마진을 설정 */
+}
+
+.table-container {
+    margin: 0 auto; /* 테이블을 중앙에 정렬 */
+    width: max-content; /* 테이블의 너비를 내용에 맞게 설정 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+
+table {
+    width: 100%; /* 테이블의 너비를 100%로 설정 */
+    border-collapse: collapse; /* 테이블 테두리를 합치기 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+
+table th, table td {
+    text-align: center; /* 테이블 셀을 중앙에 정렬 */
+    padding: 8px; /* 테이블 셀의 패딩을 설정 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}

@@ -1,0 +1,19 @@
+body {
+    background-image: url('../images/base.jpg'); /* 이미지 경로 확인해서 수정*/
+    background-size: cover; /* 배경 이미지를 페이지에 맞게 조절 */
+    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
+}
+
+h1 {
+    text-align: center; /* 텍스트를 중앙에 정렬 */
+    margin-top: 50px; /* 상단 여백 조정 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}
+
+.start-button {
+    display: block;
+    margin: 0 auto; /* 가로 정중앙 정렬 */
+    padding: 20px; /* 버튼 내부 여백 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+    text-align: center; /* 텍스트를 중앙에 정렬 */
+}
