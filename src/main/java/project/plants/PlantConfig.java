@@ -2,19 +2,19 @@ package project.plants;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import project.plants.demo.repo.PlantRepository;
-import project.plants.service.PlantService;
+import project.plants.demo.repo.ImageRepository;
+import project.plants.service.ImageService;
 
 @Configuration
 public class PlantConfig {
-    private final PlantRepository plantRepository;
+    private final ImageRepository plantRepository;
 
-    public PlantConfig(PlantRepository plantRepository) {
+    public PlantConfig(ImageRepository plantRepository) {
         this.plantRepository = plantRepository;
     }
 
     @Bean
-    public PlantService plantService() {
-        return new PlantService(this.plantRepository);
+    public ImageService plantService() {
+        return new ImageService(this.plantRepository);
     }
 }

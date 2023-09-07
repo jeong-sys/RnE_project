@@ -1,19 +1,20 @@
-package project.plants.controller;
+package project.plants.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import project.plants.controller.CacheItem;
+
 
 @Service
 public class ImageFinishService {
-
+    
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private String DB_condition;
 
     public void saveCache(CacheItem item, String condition) {
-        
         String key = item.getKey();
         String value = item.getValue();
         String page = key.split("-")[2];
