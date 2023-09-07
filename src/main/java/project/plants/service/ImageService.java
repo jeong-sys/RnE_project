@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import project.plants.demo.repo.ImageRepository;
+import project.plants.repo.ImageRepository;
 
 public class ImageService {
     

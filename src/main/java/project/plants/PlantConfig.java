@@ -2,7 +2,8 @@ package project.plants;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import project.plants.demo.repo.ImageRepository;
+
+import project.plants.repo.ImageRepository;
 import project.plants.service.ImageService;
 
 @Configuration
