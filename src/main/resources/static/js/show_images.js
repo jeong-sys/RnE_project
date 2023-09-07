@@ -118,7 +118,7 @@ async function sendDataToServer() {
     console.log("Sending data: ", cacheData);
 
     // 데이터를 서버에 전송합니다.
-    fetch('/saveCacheToDB', { // fetch API 로 '/saveCache'경로에 POST 요청
+    fetch('/api/saveCacheToDB', { // fetch API 로 '/saveCache'경로에 POST 요청
         method: 'POST',
         headers: {
             'Content-Type': 'application/json' // json 형태 전송
