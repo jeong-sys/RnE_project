@@ -15,6 +15,7 @@ import java.util.Map;
 @Service
 public class ImageFinishService {
 
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

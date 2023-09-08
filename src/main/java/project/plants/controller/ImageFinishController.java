@@ -12,14 +12,13 @@ public class ImageFinishController {
 
     @Autowired
     private ImageFinishService imageFinishService;
+    private ImageService imageService;
 
     @GetMapping("/getTexts")
     @ResponseBody
     public ResponseEntity<Map<String, String>> getTexts(){
 
-        imageFinishService.getTexts();
         return ResponseEntity.ok(imageFinishService.getTexts());
-
     }
 
     @GetMapping("/score_check")
