@@ -2,11 +2,11 @@ package project.plants.demo.entity;
 
 import javax.persistence.*;
 
-@Entity//DB 테이블에 저장될 클래스
-@Table (name = "test1")
-public class test1_Entity {
+@Entity
+@Table(name = "test2")
+public class test2_Entity{
 
-    @Id // ID , DB에서는 PK(Primary Key)라고 함
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에서 자동 관리, 생성할 때마다 1,2,.. 증가
     private Long id;
 
@@ -20,6 +20,3 @@ public class test1_Entity {
     private String condition_id;
 
 }
-
-
-
