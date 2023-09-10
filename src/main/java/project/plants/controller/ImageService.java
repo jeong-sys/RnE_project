@@ -17,33 +17,11 @@ import java.util.List;
 public class ImageService {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    private String DB_condition;
+    private JdbcTemplate jdbcTemplate; // JDBC 객체 생성 (JDBC 데이터 베이스에 대한 접근 방식, 구조적 반복 줄일 수 있음) : SQL쿼리 실행
 
-    public void saveCache(CacheItem item, String condition) {
 
-        String key = item.getKey();
-        String value = item.getValue();
-        String page = key.split("-")[2];
-
-        System.out.println("!!!!!!!!2");
-        System.out.println(condition);
-
-        DB_condition = condition + "_result";
-        System.out.println(DB_condition);
-
-        String sql = "INSERT INTO " + DB_condition +" (page, text) VALUES (?, ?)";
-        jdbcTemplate.update(sql, page, value);
-    }
-
-    public String send_DB_condition(){
-        System.out.println(DB_condition);
-        return DB_condition;
-    }
-
-    public List<String> getImages(int page, String condition) {
-
-        ArrayList<String> encodedImageList = new ArrayList<>(); // Base64(binary Data를 텍스트로 변경)로 인코딩된 이미지 저장 리스트
+    public List<String> getImages(int page, String condition){
+        ArrayList<String> encodedImageList = new ArrayList<>();
 
         int startIndex = (page - 1) * 2 + 1; // 페이지별 이미지 시작 인덱스 (2장씩 페이지마다 보여줌)
         int endIndex = page * 2; // 페이지 이미지 끝 인덱스
@@ -58,7 +36,7 @@ public class ImageService {
                     // RowMapper의 mapRow() 메서드 : rs(결과값을 담아 사용자가 원하는 객체에 담음), rowNum(반복되는 루프 중 현재 행의 번호를 나타냄)
                     try {
                         String filepath = rs.getString("filepath"); // 파일 경로 가져옴
-                        System.out.println("filepath : "+ filepath);
+                        System.out.println("filepath : " + filepath);
                         byte[] imageBytes = Files.readAllBytes(Paths.get(filepath)); // 이미지 바이트 읽어옴
                         return Base64.getEncoder().encodeToString(imageBytes); // 이미지 바이트를 Base64로 인코딩
                     } catch (Exception e) {
@@ -74,8 +52,5 @@ public class ImageService {
         }
 
         return encodedImageList; // 인코딩 이미지 리스트 반환
-
     }
-
-
 }
