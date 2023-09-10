@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="/js/keyword.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/css/finishPage.css">
 </head>
 <body>
     <p id="score"></p>
-    <table border = "1">
-        <caption>
-            <strong>Result</strong>
-        </caption>
-        <th>Day</th>
-        <th>Keyword</th>
-        <tr>
-            <td> Day 1 </td>
-            <td>
-                <p id="day1_1" style="color:red;">test1</p>
-                <p id="day1_2" style="color:red;">test2</p>
-            </td>
-        </tr>
-        <tr>
-            <td> Day 2 </td>
-            <td>
-                <p id="day2_1" style="color:red;">test1</p>
-            </td>
-        </tr>
-    </table>
-    <div id="result1"></div>
-    <div id="result2"></div>
+        <div id="test1_result" class="condition-specific">
+            <table border = "1">
+                <caption>
+                    <strong>Result</strong>
+                </caption>
+                <th>Day</th>
+                <th>Keyword</th>
+                <tr>
+                    <td> Day 1 </td>
+                    <td>
+                        <p id="test1_day1_1" style="color:red;">test1</p>
+                        <p id="test1_day1_2" style="color:red;">test2</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Day 2 </td>
+                    <td>
+                        <p id="test1_day2_1" style="color:red;">test1</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="test2_result" class="condition-specific">
+            <table border = "1">
+                <caption>
+                    <strong>Result</strong>
+                </caption>
+                <th>Day</th>
+                <th>Keyword</th>
+                <tr>
+                    <td> Day 1 </td>
+                    <td>
+                        <p id="test2_day1_1" style="color:red;">test1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Day 2 </td>
+                    <td>
+                        <p id="test2_day2_1" style="color:red;">test1</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
 </body>
 </html>

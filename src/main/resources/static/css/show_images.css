@@ -1,0 +1,65 @@
+body {
+    background-image: url('../images/base.jpg'); /* 이미지 경로 확인해서 수정*/
+    background-size: cover; /* 배경 이미지를 페이지에 맞게 조절 */
+    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
+}
+
+h1 {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 40px;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.test-selection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* 수직 가운데 정렬 */
+    align-items: center; /* 수평 가운데 정렬 */
+    height: 70vh; /* 화면 높이의 70%로 설정 */
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 23px;
+}
+
+.test-selection label {
+    display: flex; /* 라디오 버튼과 라벨을 수평 정렬하기 위해 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-bottom: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 10px; /* 라디오 버튼과 라벨 사이의 간격 설정 */
+    align-self: flex-start; /* 라디오 버튼을 위로 정렬 */
+}
+
+.test-selection label span {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.test-selection button {
+    background-color: #6495ED;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 15px;
+    font-family: 'Nanum Gothic', cursive;
+    display: block; /* 버튼을 라벨 아래 중앙에 위치시킵니다 */
+    margin: 20px auto; /* 상하 마진을 추가하고 중앙에 위치시킵니다 */
+}
+
+.test-selection button:hover{
+    box-shadow: 0px 0px 0px 5px #0a0a23;
+}
+
+.image-group {
+    display: flex; /* 이미지들을 가로로 배열합니다 */
+    justify-content: center; /* 이미지 그룹을 중앙에 정렬합니다 */
+}
+
+.journal-input {
+    display: block; /* 입력 창을 블록 요소로 만들어 이미지 그룹 아래에 위치시킵니다 */
+    margin: 20px auto; /* 상하 마진을 추가하고 중앙에 위치시킵니다 */
+    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+}

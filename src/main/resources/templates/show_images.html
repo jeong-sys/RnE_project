@@ -3,16 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>Show Images</title>
+        <link rel="stylesheet" href="/css/show_images.css">
         <script src="/js/show_images.js" charset="utf-8"></script>
+        <style>
+            @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+        </style>
     </head>
     <body>
-        <div id="selection">
-            <p>조건 선택</p>
+        <div id="selection" class="test-selection">
+            <h1> < 조건 선택 > </h1>
             <label>
-                <input type="radio" name="table" value="test1"> Test1
+                <input type="radio" name="table" value="test1"> WATER (O)
             </label>
             <label>
-                <input type="radio" name="table" value="test2"> Test2
+                <input type="radio" name="table" value="test2"> WATER (X)
+            </label>
+            <label>
+                <input type="radio" name="table" value="test3"> SUN (O)
+            </label>
+            <label>
+                <input type="radio" name="table" value="test4"> SUN (X)
             </label>
             <button onclick="submitSelection()">Submit</button>
         </div>

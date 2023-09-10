@@ -1,6 +1,6 @@
 let currentPage = 1; // 현재 페이지 번호
 let currentTable = null; // 현재 선택된 테이블
-let finalPage = 2;
+let finalPage = 7;
 
 // 사용자가 선택한 테이블에 따라 이미지를 로드하는 함수
 function submitSelection() {
