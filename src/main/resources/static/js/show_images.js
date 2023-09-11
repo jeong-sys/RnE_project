@@ -1,6 +1,6 @@
 let currentPage = 1; // 현재 페이지 번호
 let currentTable = null; // 현재 선택된 테이블
-let finalPage = 7;
+let finalPage = 5;
 
 // 사용자가 선택한 테이블에 따라 이미지를 로드하는 함수
 function submitSelection() {
@@ -44,7 +44,7 @@ async function loadImages() {
 // 마지막 페이지 버튼 submit 변경
 function btnChange() {
     if (currentPage == finalPage)
-    { document.getElementById('write_submit').innerText = `Result`; }
+    { document.getElementById('write_submit').innerText = `Submit`; }
     else { document.getElementById('write_submit').innerText = 'Next'}
 }
 

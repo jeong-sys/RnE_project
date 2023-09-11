@@ -53,13 +53,56 @@ input[type="radio"] {
     box-shadow: 0px 0px 0px 5px #0a0a23;
 }
 
-.image-group {
-    display: flex; /* 이미지들을 가로로 배열합니다 */
-    justify-content: center; /* 이미지 그룹을 중앙에 정렬합니다 */
+#imageDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
 }
 
-.journal-input {
-    display: block; /* 입력 창을 블록 요소로 만들어 이미지 그룹 아래에 위치시킵니다 */
-    margin: 20px auto; /* 상하 마진을 추가하고 중앙에 위치시킵니다 */
-    font-family: sans-serif; /* 원하는 폰트 추후에 설정 */
+#page {
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+
+#image1, #image2 {
+    width: 370px;
+    height: 370px;
+    border: 3px solid white;
+}
+
+#image1 {
+    margin-right: 7px;
+}
+
+.text {
+    width: 750px;
+    height: 150px;
+    font-size: 15px;
+    margin-top: 7px;
+}
+
+#btn {
+    display: flex;
+    justify-content: right;
+    margin-right: 330px;
+}
+
+button {
+    background-color: #6495ED;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 15px;
+    font-family: 'Nanum Gothic', cursive;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: translateY(3px);
 }

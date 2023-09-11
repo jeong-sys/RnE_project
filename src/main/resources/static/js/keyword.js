@@ -16,16 +16,28 @@ fetch('/getCondition')
                 if (resultCondition == "test1_result") {
                     document.getElementById('test1_result').style.display = 'block';
                     // 맵 데이터에 따라 글자 색상 변경
-                    if (data.day1.includes('day1_1')) {
+                    if (data.day1.includes('1')) {
                         document.getElementById('test1_day1_1').style.color = 'blue';
                         total += 10;
                     }
-                    if (data.day1.includes('day1_2')) {
+                    if (data.day1.includes('1_2')) {
                         document.getElementById('test1_day1_2').style.color = 'blue';
                         total += 10;
                     }
-                    if (data.day2.includes('day2_1')) {
+                    if (data.day2.includes('2')) {
                         document.getElementById('test1_day2_1').style.color = 'blue';
+                        total += 10;
+                    }
+                    if (data.day3.includes('3')) {
+                        document.getElementById('test1_day3').style.color = 'blue';
+                        total += 10;
+                    }
+                    if (data.day4.includes('4')) {
+                        document.getElementById('test1_day4').style.color = 'blue';
+                        total += 10;
+                    }
+                    if (data.day5.includes('5')) {
+                        document.getElementById('test1_day5').style.color = 'blue';
                         total += 10;
                     }
 

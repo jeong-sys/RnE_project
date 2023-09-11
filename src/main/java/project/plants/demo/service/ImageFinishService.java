@@ -96,21 +96,31 @@ public class ImageFinishService {
         Map<String, List<String>> map = new HashMap<>();
         List<String> textList;
 
-
         if ("test1_result".equals(condition_result)) {
             // test1_result 테이블에 대한 처리
 
-            textList = test1ResultRepository.find2Text(PageRequest.of(0, 7));
+            textList = test1ResultRepository.find2Text(PageRequest.of(0, 5));
             Collections.reverse(textList);
+            System.out.println("@@@@@@@@@@");
+            System.out.println(textList);
 
-            if (textList.get(0).contains("day1_1")) {
-                map.computeIfAbsent("day1", k -> new ArrayList<>()).add("day1_1");
+            if (textList.get(0).contains("1")) {
+                map.computeIfAbsent("day1", k -> new ArrayList<>()).add("1");
             }
-            if (textList.get(0).contains("day1_2")) {
-                map.computeIfAbsent("day1", k -> new ArrayList<>()).add("day1_2");
+            if (textList.get(0).contains("1_2")) {
+                map.computeIfAbsent("day1", k -> new ArrayList<>()).add("1_2");
             }
-            if (textList.get(1).contains("day2_1")) {
-                map.computeIfAbsent("day2", k -> new ArrayList<>()).add("day2_1");
+            if (textList.get(1).contains("2")) {
+                map.computeIfAbsent("day2", k -> new ArrayList<>()).add("2");
+            }
+            if (textList.get(2).contains("3")) {
+                map.computeIfAbsent("day3", k -> new ArrayList<>()).add("3");
+            }
+            if (textList.get(3).contains("4")) {
+                map.computeIfAbsent("day4", k -> new ArrayList<>()).add("4");
+            }
+            if (textList.get(4).contains("5")) {
+                map.computeIfAbsent("day5", k -> new ArrayList<>()).add("5");
             }
 
         }
@@ -156,6 +166,7 @@ public class ImageFinishService {
             }
 
         }
+        System.out.println("@@@ " + map);
         return map;
     }
 }
