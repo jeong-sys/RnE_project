@@ -1,6 +1,6 @@
 body {
     background-image: url('../images/base.jpg');
-    background-size: cover;
+    background-size:cover;
     background-repeat: no-repeat;
 }
 
@@ -9,18 +9,21 @@ body {
     flex-direction: column;
     align-items: center; /* 수직 가운데 정렬 */
     justify-content: center; /* 수평 가운데 정렬 */
-    height: 70vh; /* 화면 높이의 100%로 설정 */
+    position: relative; /* 상대 위치 설정 */
+    top: 350px; /* 120px만큼 아래로 이동 */
 }
 
 h1 {
-    font-family: 'Jeju Gothic', cursive;
-    font-size: 50px; /* 글꼴 크기 설정 */
+    color: #fff;
+    font-family: 'UhBeeKeongKeong';
+    font-size: 50px;
+    text-align: center; /* 텍스트를 가운데 정렬 */
 }
 
 .start-button {
-    background-color: #01939A;
+    background-color: black;
     color: #fff;
-    border: none;
+    border: 2px solid #fff;
     border-radius: 10px;
     padding: 20px;
     font-size: 15px;
@@ -34,4 +37,9 @@ h1 {
     box-shadow: 0px 0px 0px 5px #0a0a23;
 }
 
-
+@font-face {
+    font-family: 'UhBeeKeongKeong';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeKeongKeong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

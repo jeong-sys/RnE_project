@@ -1,6 +1,7 @@
 let currentPage = 1; // 현재 페이지 번호
 let currentTable = null; // 현재 선택된 테이블
 let finalPage = 5;
+let newPage;
 
 // 사용자가 선택한 테이블에 따라 이미지를 로드하는 함수
 function submitSelection() {
@@ -59,7 +60,7 @@ function displayImages(data) {
 }
 
 function updatePageNum(){
-    document.getElementById('page').innerText = `Page ${currentPage}`;
+    document.getElementById('page').innerText = `Day ${currentPage}`;
 }
 
 // Cache에 현재 페이지의 텍스트를 저장하는 함수
@@ -87,18 +88,32 @@ async function loadTextFromCache() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function (){
+    btnHidden();
+});
+function btnHidden() {
+
+    // 왜 처음부터 안나옴.....
+
+    if (newPage > 1)
+    { document.getElementById('previous_btn').style.display = 'block' ; }
+    else { document.getElementById('previous_btn').style.display = 'none'; }
+
+}
+
 // 페이지 이동하는 함수 (이전/다음 버튼 클릭 시)
 async function changePage(offset) {
     await saveCurrentTextToCache();
 
-    const newPage = currentPage + offset; // 새로운 페이지 계산
+    newPage = currentPage + offset; // 새로운 페이지 계산
+    btnHidden();
 
     // 이미지 로드 시도
     const response = await fetch(`/getImages?page=${newPage}&condition=${currentTable}`);
     const data = await response.json();
 
     // 이미지 데이터가 있을 경우만 페이지를 업데이트
-    if (data.length > 0) {
+    if (data.length > 0) {;
         currentPage = newPage; // 페이지 번호 업데이트
         btnChange();
         updatePageNum();

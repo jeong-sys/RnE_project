@@ -10,6 +10,7 @@
     text-align: center; /* 가운데 정렬 */
     font-size: 24px; /* 글꼴 크기 설정 */
     margin-top: 40px; /* 위쪽 여백 조정 */
+    color: white;
 }
 
 body {
@@ -37,24 +38,34 @@ h1 {
 }
 
 th {
-    background-color: #ADD8E6; /* 헤더 배경색을 #6495ED로 설정 */
+    background-color: white; /* 헤더 배경색을 #6495ED로 설정 */
     color: black; /* 헤더 글자색을 하양(#FFFFFF)으로 설정 */
     padding: 10px;
     text-align: center;
-    font-size: 20px;
+    font-size: 25px;
+    font-family: 'UhBeeKeongKeong'; /* 원하는 글꼴로 설정 */
 }
 
 td {
-    background-color: #FFFFFF; /* 나머지 셀 배경색을 하양(#FFFFFF)으로 설정 */
+    background-color: black;
+    color: white; /* 셀 텍스트 색상을 하얀색(#FFFFFF)으로 설정 */
     padding: 10px;
     text-align: center;
-    font-size: 17px;
+    font-size: 20px;
+    font-family: 'UhBeeKeongKeong'; /* 원하는 글꼴로 설정 */
 }
 
 
 table th, table td {
+    width: 200px;
+    height: 25px;
     text-align: center;
     padding: 20px; /* 셀 패딩을 더 넓게 조정 */
     font-weight: bold; /* 헤더 텍스트 굵게 */
 }
 
+.table-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
