@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Show Images</title>
+</head>
+<body>
+
+<!-- Image Upload Form -->
+<form action="/image/upload" method="post" enctype="multipart/form-data">
+    <label for="image">Upload Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" required>
+    <button type="submit">Upload</button>
+</form>
+
+<!-- Display Images -->
+<h2>Uploaded Images:</h2>
+<div th:each="img : ${images}">
+    <img th:src="@{/img/${img.fileName}}" alt="Uploaded Image">
+</div>
+
+</body>
+</html>

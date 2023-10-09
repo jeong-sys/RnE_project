@@ -1,46 +1,46 @@
 package project.plants.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.cache.annotation.EnableCaching;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import project.plants.demo.repo.ImageRepository;
 import project.plants.demo.entity.Image;
+import project.plants.demo.service.ImageService;
 
-
-import java.awt.*;
 import java.io.IOException;
-
 import java.util.List;
 
-
 @Controller
-@EnableCaching
+@RequestMapping("/image")
 public class ImageController {
 
     @Autowired
-    private ImageRepository imageRepository;
+    private ImageService imageService;
 
-    @GetMapping("/select_condition")
-    public String showImages(Model model) {
-        List<java.awt.Image> images = imageRepository.findAll();
+    @GetMapping("/show")
+    public String showImage(Model model) {
+        List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
-        return "show_images";
+        return "show_image";
     }
 
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        Image img = new Image();
-        img.setData(file.getBytes());
-        imageRepository.save(img);
-        return "redirect:/images/show";
+    public String uploadImage(@RequestParam("image") MultipartFile file) {
+        if (file.isEmpty()) {
+            return "redirect:/image/show?error";
+        }
+
+        try {
+            imageService.saveImage(file);  // 이미지를 저장하고, 데이터베이스에 경로도 저장
+        } catch (IOException e) {
+            // Error handling
+            return "redirect:/image/show?error";
+        }
+
+        return "redirect:/image/show";
     }
-
-
-
 }
-

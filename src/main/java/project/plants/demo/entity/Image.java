@@ -1,10 +1,6 @@
-package com.example.demo.model;
+package project.plants.demo.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
 public class Image {
@@ -13,25 +9,28 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
+    private String fileName;
+
+    private String path;
+
+
+    @Lob  // Large Object to store image data
     private byte[] data;
 
-    // 기본 생성자
-    public Image() {
-    }
-
-    // 데이터를 포함한 생성자
-    public Image(byte[] data) {
-        this.data = data;
-    }
-
-    // Getter and Setter 메소드
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public byte[] getData() {
@@ -41,4 +40,13 @@ public class Image {
     public void setData(byte[] data) {
         this.data = data;
     }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
 }
