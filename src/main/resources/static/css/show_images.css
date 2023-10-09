@@ -1,8 +1,8 @@
-body {
-    background-image: url('../images/base.jpg'); /* 이미지 경로 확인해서 수정*/
-    background-size: cover; /* 배경 이미지를 페이지에 맞게 조절 */
-    background-repeat: no-repeat; /* 배경 이미지가 반복되지 않도록 설정 */
-}
+/*body {*/
+/*    background-image: url('../images/base.jpg'); !* 이미지 경로 확인해서 수정*!*/
+/*    background-size: cover; !* 배경 이미지를 페이지에 맞게 조절 *!*/
+/*    background-repeat: no-repeat; !* 배경 이미지가 반복되지 않도록 설정 *!*/
+/*}*/
 
 h1 {
     font-family: 'UhBeeKeongKeong';

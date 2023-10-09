@@ -2,12 +2,8 @@ package project.plants.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 import project.plants.controller.CacheItem;
 import project.plants.demo.dto.test1Form;
 import project.plants.demo.dto.test2Form;
@@ -17,14 +13,7 @@ import project.plants.demo.entity.test1_result_Entity;
 import project.plants.demo.entity.test2_result_Entity;
 import project.plants.demo.entity.test3_result_Entity;
 import project.plants.demo.entity.test4_result_Entity;
-import project.plants.demo.repo.test1_result_Repository;
-import project.plants.demo.repo.test2_result_Repository;
 
-import org.springframework.data.domain.Pageable;
-import project.plants.demo.repo.test3_result_Repository;
-import project.plants.demo.repo.test4_result_Repository;
-
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
