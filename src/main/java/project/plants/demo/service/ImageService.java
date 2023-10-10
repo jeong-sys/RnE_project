@@ -1,6 +1,8 @@
 package project.plants.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import project.plants.demo.entity.Image;
@@ -20,38 +22,49 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    private static final String UPLOAD_DIR = "src/main/resources/static/img"; // 이미지를 저장할 경로 지정
+    private static final String UPLOAD_DIR = "src/main/resources/static/img/"; // 이미지를 저장할 경로 지정
+    private Path filePath;
+
 
     public Image saveImage(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         Path filePath = Paths.get(UPLOAD_DIR + fileName);
+
+        // DB에서 모든 이미지를 조회
+        List<Image> existingImages = imageRepository.findAll();
+
+        if (!existingImages.isEmpty()) {
+            throw new IllegalStateException("이미 이미지가 업로드 되어 있습니다.");
+        }
+
+        // 새 이미지 파일 저장
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-        Image image = new Image();
-        image.setFileName(fileName);
-        image.setPath(filePath.toString());
+        Image newImage = new Image();
+        newImage.setFileName(fileName);
+        newImage.setPath("/img/" + fileName);
 
-        return imageRepository.save(image);
+        return imageRepository.save(newImage);
     }
 
-    public List<Image> getAllImages() {
-        return imageRepository.findAll();
+    public Page<Image> getAllImages(Pageable pageable) {
+        return imageRepository.findAll(pageable);
     }
 
     public Image getImage(Long id) {
         return imageRepository.findById(id).orElse(null);
     }
 
-    public void saveImageToFileSystem(MultipartFile file) throws IOException {
-        // 디렉토리 생성 (없을 경우)
-        File directory = new File(UPLOAD_DIR);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+    public void deleteImage(Long id) {
+        Image image = imageRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid image Id:" + id));
 
-        // 중복을 방지하기 위해 타임스탬프를 파일 이름에 추가
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        File dest = new File(UPLOAD_DIR + fileName);
-        file.transferTo(dest);
+        // 파일 시스템에서 이미지 삭제
+        File file = new File(UPLOAD_DIR + image.getFileName());
+        if(file.exists()) {
+            file.delete();
+        }
+        // DB에서 이미지 정보 삭제
+        imageRepository.deleteById(id);
     }
+
 }

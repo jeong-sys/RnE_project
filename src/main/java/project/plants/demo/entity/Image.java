@@ -13,10 +13,6 @@ public class Image {
 
     private String path;
 
-
-    @Lob  // Large Object to store image data
-    private byte[] data;
-
     public Long getId() {
         return id;
     }
@@ -33,13 +29,6 @@ public class Image {
         this.fileName = fileName;
     }
 
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
 
     public String getPath() {
         return path;
