@@ -12,33 +12,33 @@
     <button type="submit">Upload</button>
 </form>
 
-<div th:each="image, imageStat : ${images}">
-    <!-- 번호 표시 -->
-    <span th:text="${imageStat.count} + '. ' + ${image.fileName}"></span>
-    <a th:href="@{/image/delete/{id}(id=${image.id})}">Delete</a>
-</div>
-
-
 <!--<div th:each="image : ${images}">-->
 <!--    <img th:src="@{${image.path}}" alt="Uploaded Image" width="300" height="300">-->
 <!--    <a th:href="@{/image/delete/{id}(id=${image.id})}">Delete</a>-->
-<!--    <img id="myImage" src="/img/water_o/day1_2.jpeg" alt="Description of Image"  width="300" height="300">-->
 <!--</div>-->
+<img id="myImage0" src="/img/water_o/day1_1.jpeg" alt="Description of Image" width="300" height="300" >
+<a>Delete</a>
 
-<!--<p>식물 살아있는 정도</p>-->
-<!--<label><input type="radio" name="plant" value="1"> 1</label>-->
-<!--<label><input type="radio" name="plant" value="2"> 2</label>-->
-<!--<label><input type="radio" name="plant" value="3"> 3</label>-->
-<!--<label><input type="radio" name="plant" value="4"> 4</label>-->
-<!--<label><input type="radio" name="plant" value="5"> 5</label>-->
+<button onclick="showImage()">Show Image</button>
 
-<a href="/showTotal">
-    <button>Submit</button>
+<img id="myImage" src="/img/water_o/day1_2.jpeg" alt="Description of Image" width="300" height="300" style="display: none;">
+
+<p>식물 살아있는 정도</p>
+<label><input type="radio" name="plant" value="1"> 1</label>
+<label><input type="radio" name="plant" value="2"> 2</label>
+<label><input type="radio" name="plant" value="3"> 3</label>
+<label><input type="radio" name="plant" value="4"> 4</label>
+<label><input type="radio" name="plant" value="5"> 5</label>
+
+<script>
+    function showImage() {
+        document.getElementById('myImage').style.display = 'block';
+    }
+</script>
+
+<a href="/final_page">
+    <button>Next</button>
 </a>
-
-<!--<script th:if="${alertMessage}" th:inline="javascript">-->
-<!--    alert([[${alertMessage}]]);-->
-<!--</script>-->
 
 </body>
 </html>

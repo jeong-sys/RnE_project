@@ -42,7 +42,7 @@ public class ImageService {
 
         Image newImage = new Image();
         newImage.setFileName(fileName);
-        newImage.setPath("/img/" + fileName);
+        newImage.setPath("/img/learning/" + fileName);
 
         return imageRepository.save(newImage);
     }
