@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import project.plants.demo.dto.ImageDTO;
 import project.plants.demo.entity.Image;
 import project.plants.demo.repo.ImageRepository;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,9 +24,7 @@ public class ImageService {
     @Autowired
     private ImageRepository imageRepository;
 
-    private static final String UPLOAD_DIR = "src/main/resources/static/img/"; // 이미지를 저장할 경로 지정
-    private Path filePath;
-
+    private static final String UPLOAD_DIR = "src/main/resources/static/img/learning/"; // 이미지를 저장할 경로 지정
 
     public Image saveImage(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
@@ -33,9 +33,9 @@ public class ImageService {
         // DB에서 모든 이미지를 조회
         List<Image> existingImages = imageRepository.findAll();
 
-        if (!existingImages.isEmpty()) {
-            throw new IllegalStateException("이미 이미지가 업로드 되어 있습니다.");
-        }
+//        if (!existingImages.isEmpty()) {
+//            throw new IllegalStateException("이미 이미지가 업로드 되어 있습니다.");
+//        }
 
         // 새 이미지 파일 저장
         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
@@ -47,8 +47,8 @@ public class ImageService {
         return imageRepository.save(newImage);
     }
 
-    public Page<Image> getAllImages(Pageable pageable) {
-        return imageRepository.findAll(pageable);
+    public List<Image> getAllImages() {
+        return imageRepository.findAll();
     }
 
     public Image getImage(Long id) {
@@ -58,7 +58,7 @@ public class ImageService {
     public void deleteImage(Long id) {
         Image image = imageRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid image Id:" + id));
 
-        // 파일 시스템에서 이미지 삭제
+        // 파일 시스템에서 이미지 삭제 // 전체 삭제
         File file = new File(UPLOAD_DIR + image.getFileName());
         if(file.exists()) {
             file.delete();
@@ -67,4 +67,10 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
+    /* Paging */
+    @Transactional
+    public Page<Image> pageList(Pageable pageable) {
+        return imageRepository.findAll(pageable); // 'imageRepository' 사용
+    }
+    
 }

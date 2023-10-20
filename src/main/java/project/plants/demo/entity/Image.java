@@ -1,5 +1,7 @@
 package project.plants.demo.entity;
 
+import project.plants.demo.dto.ImageDTO;
+
 import javax.persistence.*;
 
 @Entity
@@ -37,5 +39,7 @@ public class Image {
     public void setPath(String path) {
         this.path = path;
     }
+
+
 
 }

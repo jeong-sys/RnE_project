@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import project.plants.demo.dto.ImageDTO;
 import project.plants.demo.entity.Image;
 import project.plants.demo.service.ImageService;
 
@@ -23,38 +24,34 @@ public class ImageController {
     private ImageService imageService;
 
     @GetMapping("/show")
-    public String showImage(Model model, @RequestParam(defaultValue = "0") int page) {
-        PageRequest pageable = PageRequest.of(page, 5, Sort.by("id").ascending());
-        Page<Image> imagesPage = imageService.getAllImages(pageable);
-
-        model.addAttribute("images", imagesPage.getContent());
-        model.addAttribute("totalPages", imagesPage.getTotalPages());
-        model.addAttribute("currentPage", page);
-
+    public String showImage(Model model) {
+        List<Image> images = imageService.getAllImages();
+//        for(int i = 0; i < images.size(); i++)
+//            System.out.println(images.get(i).getFileName());
+        System.out.println(images);
+        model.addAttribute("images", images);
         return "show_image";
     }
 
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("image") MultipartFile file, Model model) {
-        if (file.isEmpty()) {
-            model.addAttribute("alertMessage", "파일을 선택해 주세요.");
-            return "redirect:/image/show?error";
-        }
+    public String uploadImage(@RequestParam("image") MultipartFile[] files, Model model) {
+        for (MultipartFile file : files) {
+            if (file.isEmpty()) {
+                continue; // Skip empty files
+            }
 
-        try {
-            imageService.saveImage(file);  // 이미지를 저장하고, 데이터베이스에 경로도 저장
-        } catch (IllegalStateException e) {
-            model.addAttribute("alertMessage", e.getMessage());
-            Pageable pageable = PageRequest.of(0, 5, Sort.by("id").ascending());
-            model.addAttribute("images", imageService.getAllImages(pageable).getContent());
-            return "show_image";
-        } catch (IOException e) {
-            model.addAttribute("alertMessage", "이미지 저장 중 오류가 발생했습니다.");
-            return "redirect:/image/show?error";
+            try {
+                imageService.saveImage(file);
+            } catch (IllegalStateException | IOException e) {
+                model.addAttribute("alertMessage", "Error uploading image: " + e.getMessage());
+                model.addAttribute("images", imageService.getAllImages());
+                return "show_image";
+            }
         }
 
         return "redirect:/image/show";
     }
+
 
     @GetMapping("/delete/{id}")
     public String deleteImage(@PathVariable Long id) {

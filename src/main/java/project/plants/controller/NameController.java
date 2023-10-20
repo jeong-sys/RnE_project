@@ -22,7 +22,7 @@ public class NameController {
     @PostMapping("/name")
     public String saveName(@RequestParam String nickname) {
         userService.findOrCreateByNickname(nickname);
-        return "redirect:/image/show";
+        return "List";
     }
 }
 

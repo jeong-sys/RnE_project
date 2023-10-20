@@ -23,6 +23,7 @@ repositories {
 
 dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation group: 'org.python', name: 'jython-standalone', version: '2.7.2'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
