@@ -99,32 +99,4 @@ public class PythonController {
 
         return modelAndView;
     }
-
-//    @PostMapping("/uploadImage")
-//    public ModelAndView uploadImage(@RequestParam("image") MultipartFile image) {
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        try {
-//            // 이미지를 /src/save 디렉토리에 저장
-//            String saveDir = "src/main/resources/static/predictImg/";
-//            Path filePath = Paths.get(saveDir + image.getOriginalFilename());
-//            Files.write(filePath, image.getBytes());
-//
-//            // 파이썬 스크립트 실행하여 이미지 라벨 예측
-//            ProcessBuilder processBuilder = new ProcessBuilder("python", "predict.py", filePath.toString());
-//            Process process = processBuilder.start();
-//
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//            String predictedLabel = reader.readLine(); // 예측된 라벨 가져오기
-//
-//            modelAndView.addObject("result", predictedLabel);
-//            modelAndView.setViewName("predictionResult");
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            modelAndView.setViewName("errorPage"); // 에러 페이지로 리디렉션 (선택 사항)
-//        }
-//
-//        return modelAndView;
-//    }
 }
