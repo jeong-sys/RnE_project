@@ -49,11 +49,11 @@ for file_name in os.listdir(image_dir):
         image = Image.open(image_path)
 
         # for i in range(9): # 9개의 숫자에 대해서
-        #     for j in range(13): # 각 숫자별 6개의 스타일
+        #     for j in range(13): # 각 숫자별 13개의 스타일
         #         cropped_img = image.crop((j*28, i*28, (j+1)*28, (i+1)*28))
         #         data.append((cropped_img, i))
-        for i in range(9): # 9개의 숫자에 대해서
-            for j in range(13): # 각 숫자별 6개의 스타일
+        for i in range(9):
+            for j in range(13):
                 cropped_img = image.crop((j*28, i*28, (j+1)*28, (i+1)*28))
                 data.append((cropped_img, i))
 

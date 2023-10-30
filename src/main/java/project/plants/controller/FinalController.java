@@ -9,6 +9,6 @@ public class FinalController {
 
     @GetMapping("/final_page")
     public String final_page(){
-        return "final";
+        return "predictionResult";
     }
 }
