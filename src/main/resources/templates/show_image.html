@@ -2,43 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Show Images</title>
+    <link rel="stylesheet" href="/css/show_image.css">
+    <script src="/js/show_image.js" charset="utf-8"></script>
 </head>
 <body>
 
-<!-- Image Upload Form -->
-<form action="/image/upload" method="post" enctype="multipart/form-data">
-    <label for="image">Upload Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
-    <button type="submit">Upload</button>
+<h1 class="day-log">< 일지를 입력해주세요 ></h1>
+
+<form action="/image/uploadAndMove" method="post" enctype="multipart/form-data">
+    <div id="imageDisplay">
+        <!-- Upload Section -->
+        <div class="image-section">
+            <div class="action-button">
+                <label for="image">Upload Image:</label>
+                <input type="file" id="image" name="uploadImage" accept="image/*" required onchange="displayImage(this)">
+            </div>
+            <div id="placeholder1" style="width: 300px; height: 300px;"></div>
+            <img id="myImage" th:if="${currentImage}" th:src="${currentImage.path}" alt="Description of Image" width="300" height="300" style="display: none;">
+        </div>
+        <!-- Show Image Section -->
+        <div class="image-section">
+            <div class="action-button">
+                <button type="button" onclick="showImage(event)" value="show image">Show Image</button>
+            </div>
+            <div id="placeholder2" style="width: 300px; height: 300px;"></div>
+            <img id="x-image" th:if="${Ximage}" th:src="@{${Ximage.image_path}}" alt="Description of Image" width="300" height="300" style="display: none;">
+        </div>
+    </div>
 </form>
 
-<!--<div th:each="image : ${images}">-->
-<!--    <img th:src="@{${image.path}}" alt="Uploaded Image" width="300" height="300">-->
-<!--    <a th:href="@{/image/delete/{id}(id=${image.id})}">Delete</a>-->
-<!--</div>-->
-<img id="myImage0" src="/img/water_o/day1_1.jpeg" alt="Description of Image" width="300" height="300" >
-<a>Delete</a>
+<div id="radio-container">
+    <p> < 식물이 살아있는 정도를 선택해주세요 > </p>
 
-<button onclick="showImage()">Show Image</button>
+    <div id="radioDisplay">
+        <input type="radio" name="plant" value="1" id="radio1"><label for="radio1">완전 죽음</label>
+        <input type="radio" name="plant" value="2" id="radio2"><label for="radio2">조금 죽음</label>
+        <input type="radio" name="plant" value="3" id="radio3"><label for="radio3">변화 없음</label>
+        <input type="radio" name="plant" value="4" id="radio4"><label for="radio4">조금 성장</label>
+        <input type="radio" name="plant" value="5" id="radio5"><label for="radio5">매우 성장</label>
+    </div>
+</div>
 
-<img id="myImage" src="/img/water_o/day1_2.jpeg" alt="Description of Image" width="300" height="300" style="display: none;">
+<div class="navigation-buttons">
+    <!-- 이전 버튼 (첫 페이지면 비활성화) -->
+    <a th:if="${currentPage > 1}" th:href="@{/image/show?page=__${currentPage - 1}__}">
+        <button>Previous</button>
+    </a>
 
-<p>식물 살아있는 정도</p>
-<label><input type="radio" name="plant" value="1"> 1</label>
-<label><input type="radio" name="plant" value="2"> 2</label>
-<label><input type="radio" name="plant" value="3"> 3</label>
-<label><input type="radio" name="plant" value="4"> 4</label>
-<label><input type="radio" name="plant" value="5"> 5</label>
+    <a th:if="${currentPage == 1}" style="pointer-events: none;">
+        <button disabled>Previous</button>
+    </a>
 
-<script>
-    function showImage() {
-        document.getElementById('myImage').style.display = 'block';
-    }
-</script>
+    <!-- 다음 버튼 (5 페이지면 비활성화) -->
+    <a th:if="${currentPage < 5}" onclick="submitFormOrAlert()">
+        <button type="button">Next</button>
+    </a>
 
-<a href="/final_page">
-    <button>Next</button>
-</a>
+    <a th:if="${currentPage == 5}" onclick="submitOrAlert()">
+        <button type="button">finish</button>
+    </a>
+</div>
 
 </body>
 </html>

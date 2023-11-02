@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Enter Nickname</title>
+    <title>Input Name</title>
+    <link rel="stylesheet" href="/css/name.css">
 </head>
 <body>
-<form action="/user/name" method="post">
-    <label for="nickname">Nickname:</label>
-    <input type="text" id="nickname" name="nickname" required>
-    <button type="submit">Submit</button>
-</form>
+<div class="main">
+    <h1>
+        이름을 입력하세요
+    </h1>
+    <form action="/user/name" method="post">
+        <div class="input">
+            <input type="text" id="nickname" name="nickname" requred>
+        </div>
+        <br><br>
+        <button class="next" type="submit">Submit</button>
+    </form>
+</div>
 </body>
 </html>

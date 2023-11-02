@@ -3,16 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/List.css">
+    <style>
+        @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+    </style>
 </head>
+
 <body>
-
-    <label><input type="radio" name="plant" value="1"> water_o</label>
-    <label><input type="radio" name="plant" value="2"> water_x</label>
-    <label><input type="radio" name="plant" value="3"> sun_o</label>
-    <label><input type="radio" name="plant" value="4"> sun_x</label>
-
+<div id="selection" class="test-selection">
+    <h1> < 조건 선택 > </h1>
+    <label>
+        <input type="radio" name="table" value="test1"> WATER (O)
+    </label>
+    <label>
+        <input type="radio" name="table" value="test2"> WATER (X)
+    </label>
+    <label>
+        <input type="radio" name="table" value="test3"> SUN (O)
+    </label>
+    <label>
+        <input type="radio" name="table" value="test4"> SUN (X)
+    </label>
     <a href="/image/show">
-        <button>Enter Next</button>
+        <button>Next</button>
     </a>
+</div>
 </body>
 </html>

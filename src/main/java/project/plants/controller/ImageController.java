@@ -9,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import project.plants.demo.dto.ImageDTO;
 import project.plants.demo.entity.Image;
+import project.plants.demo.entity.x_Image;
 import project.plants.demo.service.ImageService;
+import project.plants.demo.service.XImageService;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,40 +26,37 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @GetMapping("/show")
-    public String showImage(Model model) {
-        List<Image> images = imageService.getAllImages();
-//        for(int i = 0; i < images.size(); i++)
-//            System.out.println(images.get(i).getFileName());
-        System.out.println(images);
-        model.addAttribute("images", images);
-        return "show_image";
-    }
+    @Autowired
+    private XImageService xImageService;
 
-    @PostMapping("/upload")
-    public String uploadImage(@RequestParam("image") MultipartFile[] files, Model model) {
-        for (MultipartFile file : files) {
-            if (file.isEmpty()) {
-                continue; // Skip empty files
-            }
-
+    @PostMapping("/uploadAndMove")
+    public String uploadImageAndMoveToNextPage(@RequestParam(name = "uploadImage", required = false) MultipartFile file,
+                                               @RequestParam(name = "currentPage", required = false, defaultValue = "1") int page,
+                                               Model model, RedirectAttributes redirectAttributes) {
+        if (file != null && !file.isEmpty()) {
             try {
-                imageService.saveImage(file);
+                Image image = imageService.saveImage(file, page);  // 페이지 번호를 파라미터로 추가
             } catch (IllegalStateException | IOException e) {
-                model.addAttribute("alertMessage", "Error uploading image: " + e.getMessage());
-                model.addAttribute("images", imageService.getAllImages());
-                return "show_image";
+                redirectAttributes.addFlashAttribute("alertMessage", "Error uploading image: " + e.getMessage());
+                return "redirect:/image/show?page=" + page;
             }
+        } else {
+            redirectAttributes.addFlashAttribute("alertMessage", "No image selected for upload.");
+            return "redirect:/image/show?page=" + page;
         }
 
-        return "redirect:/image/show";
+        return "redirect:/image/show?page=" + (page + 1);
     }
 
 
-    @GetMapping("/delete/{id}")
-    public String deleteImage(@PathVariable Long id) {
-        imageService.deleteImage(id);
-        return "redirect:/image/show";
+    @GetMapping("/show")
+    public String showImage(@RequestParam(required = false, defaultValue = "1") int page, Model model) {
+        List<Image> images = imageService.getImagesByPage(page);
+        x_Image xImage = xImageService.getImageByPage(page);
+        model.addAttribute("Ximage", xImage);
+        model.addAttribute("currentImage", images.isEmpty() ? null : images.get(0));
+        model.addAttribute("currentPage", page); // 현재 페이지 번호를 뷰에 전달
+        return "show_image";
     }
-
 }
+

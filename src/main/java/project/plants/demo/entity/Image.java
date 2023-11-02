@@ -14,6 +14,7 @@ public class Image {
     private String fileName;
 
     private String path;
+    private int page;
 
     public Long getId() {
         return id;
@@ -40,6 +41,12 @@ public class Image {
         this.path = path;
     }
 
+    public int getPage() {
+        return page;
+    }
 
+    public void setPage(int page) {
+        this.page = page;
+    }
 
 }
